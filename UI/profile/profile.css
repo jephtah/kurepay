@@ -1,0 +1,136 @@
+body {
+    width: 600px;
+    height: 600px;
+    padding: 20px 40px;
+}
+
+.kure-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.kure-profile ul {
+    list-style-type: none;
+    margin: 0px;
+}
+
+.kure-profile .profile-text {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.kure-profile .profile-text .account-bal {
+    font-size: 14px;
+    font-weight: 300;
+    color: #424242;
+    margin-bottom: 0px;
+}
+
+.kure-profile .profile-text .ref-id {
+    font-size: 12px;
+    font-weight: 300;
+    color: #717171;
+    margin-bottom: 0px;
+    margin-top: -2px;
+}
+
+.kure-profile .profile-text .select-cur,
+.kure-profile .profile-box {
+    position: relative;
+}
+
+.kure-profile .profile-text .select-cur p {
+    color: #006577;
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: -5px;
+    margin-right: -5px;
+    cursor: pointer;
+}
+
+.kure-profile .profile-text .select-cur p span {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.kure-profile .profile-text .select-cur ul,
+.kure-profile .profile-box ul {
+    position: absolute;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 12px rgba(18,22,28,0.16);
+    padding: 0px;
+    right: 0px;
+    border-radius: 5px;
+    width: 60px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #424242;
+    text-align: center;
+}
+
+.kure-profile .profile-box div {
+    width: 55px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #34495E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kure-profile .profile-box div p {
+    font-weight: 600;
+    font-size: 30px;
+    color: #F5F5F5;
+    margin-bottom: 0px;
+}
+
+.kure-profile .profile-box ul {
+    width: 160px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #424242;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.kure-profile .profile-box ul li,
+.kure-profile .profile-text .select-cur ul li {
+    border-bottom: 1px solid #F5F5F5;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.kure-profile .profile-box ul li:hover,
+.kure-profile .profile-text .select-cur ul li:hover {
+    background-color: #F5F5F5;
+}
+
+.kure-profile .profile-box ul li:last-child {
+    border-bottom: none;
+}
+
+.kure-profile .profile-box ul li:first-child:hover {
+    background-color: #FFFFFF;
+    cursor: text;
+}
+
+/* .kure-profile .profile-text .select-cur ul {
+    display: none;
+}
+
+.kure-profile .profile-text .select-cur p:hover + ul {
+    display: block;
+} */
+
+.kure-profile .profile-box ul {
+    display: none;
+}
+
+.kure-profile .profile-box div:hover + ul {
+    display: block;
+}

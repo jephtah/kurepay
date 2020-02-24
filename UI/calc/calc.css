@@ -1,0 +1,184 @@
+.kure-calc {
+    background-color: #006577;
+    padding: 20px;
+}
+
+.kure-calc form {
+    display: flex;
+    padding: 0px;
+    height: 130px;
+    width: 200px;
+}
+
+.kure-calc form ul {
+    list-style-type: none;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-right: 18px;
+}
+
+.kure-calc .crypto-coins {
+    position: relative;
+}
+
+.kure-calc .crypto-coins .crypto-coin {
+    margin-bottom: 5px;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kure-calc .crypto-coins .crypto-coin:hover {
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.kure-calc .crypto-coins .crypto-coin.active {
+    border: 2px solid rgb(255,255,255);
+}
+
+.kure-calc .crypto-coins .crypto-coin img {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.kure-calc .crypto-coins .arrow-up,
+.kure-calc .crypto-coins .arrow-down {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.kure-calc .crypto-coins .arrow-up {
+    position: absolute;
+    left: 7.5px;
+}
+
+.kure-calc .crypto-coins .arrow-down {
+    position: absolute;
+    left: 7.5px;
+    bottom: 0px;
+}
+
+.kure-calc .crypto-coins .arrow-up i,
+.kure-calc .crypto-coins .arrow-down i {
+    color: #006577;
+    font-size: 20px;
+}
+
+.kure-calc .crypto-coins .arrow-up:hover,
+.kure-calc .crypto-coins .arrow-down:hover {
+    opacity: 0.8;
+}
+
+.input-select {
+    position: relative;
+    width: 100%;
+}
+
+.input-select div {
+    height: 35px;
+    border-radius: 4px;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.input-select div p {
+    font-size: 12px;
+    font-weight: 100;
+    color: #424242;
+    margin-bottom: 0px;
+}
+
+.input-select div i {
+    color: #717171;
+    font-size: 20px;
+}
+
+.input-select ul {
+    list-style-type: none;
+    padding: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 130px;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    overflow: scroll;
+    box-shadow: 0px 0px 6px rgba(18, 22, 28, 0.16);
+    width: 100%;
+    /* padding: 5px 0px; */
+}
+
+.input-select ul li {
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #717171;
+    font-weight: 100;
+}
+
+.input-select ul li:hover {
+    background-color: #959595;
+    color: #F5F5F5;
+}
+
+.input-select ul {
+    display: none;
+}
+
+/* .input-select > div:hover + ul {
+    display: block;
+} */
+
+.inputs input[type=number] {
+    border: none;
+    outline: none;
+    height: 35px;
+    border-radius: 4px;
+    padding: 0px 10px;
+    color: #424242;
+    margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.inputs input[type=number]::placeholder {
+    color: #959595;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.inputs .calc-result {
+    border: none;
+    outline: none;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 4px;
+    padding: 0px 10px;
+    background-color: rgba(18, 22, 28, 0.5);
+    /* display: flex;
+    align-content: center; */
+    color: #F5F5F5;
+    margin-bottom: 0px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/* .inputs .calc-result p {
+} */

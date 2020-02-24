@@ -1,0 +1,245 @@
+body {
+    background-color: #F5F5F5;
+    padding: 80px;
+}
+
+.kure-form p {
+    margin-bottom: 0px;
+}
+
+.kure-form .top-form {
+    margin-bottom: 30px;
+}
+
+.kure-form .top-form .form-title {
+    /* font-weight: 400; */
+    color: #424242;
+}
+
+.kure-form .top-form .form-subtitle {
+    font-weight: 300;
+    color: #DD2626;
+    font-size: 12px;
+    margin-top: -2.5px;
+}
+
+
+
+
+
+.kure-form .form-inputs {
+    width: 360px;
+    margin-bottom: 30px;
+}
+
+.kure-form .form-inputs > div {
+    margin-bottom: 15px;
+}
+
+.kure-form .form-inputs label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #418298;
+    margin-bottom: 5px;
+}
+
+.kure-form .form-inputs label.white {
+    color: #F5F5F5;
+}
+
+.kure-form .form-inputs label.gray {
+    color: #959595;
+}
+
+.kure-form .form-inputs .label-options {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.kure-form .form-inputs .label-options label,
+.kure-form .form-inputs .below-input {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kure-form .form-inputs .below-input {
+    margin-bottom: -10px;
+    margin-top: 5px;
+    justify-content: flex-end;
+    color: #34495E;
+}
+
+.kure-form .form-inputs .label-options label i,
+.kure-form .form-inputs .below-input i {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.kure-form .form-inputs input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.16);
+    height: 40px;
+    border-radius: 5px;
+    padding: 0px 20px;
+    font-size: 12px;
+    color: #717171;
+}
+
+.kure-form .form-inputs input::placeholder {
+    color: #BCBCBC;
+    text-transform: capitalize;
+}
+
+.kure-form .form-inputs input:focus {
+    box-shadow: 0px 0px 6px rgba(65, 130, 152,0.16);
+}
+
+.kure-form .form-inputs .text-input-icon > div,
+.kure-form .form-inputs .select-input > div,
+.kure-form .form-inputs .select-input {
+    position: relative;
+}
+
+.kure-form .form-inputs .text-input-icon > div i {
+    position: absolute;
+    color: #BCBCBC;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+}
+
+.kure-form .form-inputs .select-input > div i {
+    position: absolute;
+    color: #BCBCBC;
+    font-size: 24px;
+    right: 15px;
+    top: 7.5px;
+}
+
+.kure-form .form-inputs .text-input-icon > div i.colored {
+    color: #418298;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    right: 10px;
+    top: 0px;
+}
+
+.kure-form .form-inputs .text-input-icon > div input,
+.kure-form .form-inputs .select-input > div input {
+    padding-right: 52px;
+}
+
+.kure-form .form-inputs .select-input > div input {
+    cursor: pointer;
+}
+
+.kure-form .form-inputs .select-input > ul {
+    list-style-type: none;
+    padding: 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.16);
+    max-height: 200px;
+    overflow: scroll;
+    border-radius: 5px;
+    position: absolute;
+    top: 75px;
+    width: 100%;
+}
+
+.kure-form .form-inputs .select-input > ul li {
+    font-size: 12px;
+    color: #717171;
+    padding: 10px 20px;
+    border-bottom: 0.5px solid #F5F5F5;
+    cursor: pointer;
+}
+
+.kure-form .form-inputs .select-input > ul {
+    display: none;
+}
+
+.kure-form .form-inputs .select-input > ul li:hover {
+    background-color: #F5F5F5;
+}
+
+.kure-form .form-inputs .select-input > div:hover + ul {
+    display: block;
+}
+
+.kure-form .form-inputs .otp-code {
+    background-color: #34495E;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+
+.kure-form .kure-form-control .add-to-form {
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #34495E;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.kure-form .kure-form-control .add-to-form i {
+    font-size: 18px;
+    margin-right: 2.5px;
+}
+
+
+
+
+.kure-form .submit-form > div {
+    margin-bottom: 40px;
+}
+
+.kure-form .submit-form button {
+    outline: none;
+    border: none;
+    height: 40px;
+    color: #FFFFFF;
+    background-color: #006577;
+    border-radius: 5px;
+    padding: 0px 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.kure-form .submit-form > div p {
+    display: flex;
+    align-items: flex-start;
+    color: #FC5D00;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.kure-form .submit-form > div p i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+.kure-form .submit-form .disabled-button button {
+    background-color: #959595;
+    color: #BCBCBC;
+}
+
+.kure-form .submit-form > .side-text {
+    display: flex;
+}
+
+.kure-form .submit-form > .side-text p {
+    margin-left: 20px;
+}

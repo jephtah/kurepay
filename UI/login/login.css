@@ -1,0 +1,160 @@
+body {
+    background-color: #34495E;
+}
+
+.kure-login {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/bg-cover.png");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kure-login .login-box {
+    width: 360px;
+}
+
+.kure-login .login-box form .logo {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.kure-login .login-box form .logo img {
+    height: 40px;
+}
+
+.kure-login .login-box .choose-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kure-login .login-box .choose-form p {
+    font-size: 14px;
+    font-weight: 100;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+.kure-login .login-box .choose-form p.in-active {
+    opacity: 0.5;
+}
+
+.kure-login .login-box .choose-form p:first-child {
+    margin-right: 30px;
+}
+
+.kure-login .login-box .choose-form p i {
+    font-size: 18px;
+}
+
+.kure-login .login-box .form-inputs {
+    margin-bottom: 15px;
+}
+
+.kure-login .login-box .form-inputs input {
+    height: 50px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.16);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    color: #717171;
+    padding: 0px 20px;
+}
+
+.kure-login .login-box .form-inputs input:first-child {
+    margin-bottom: 5px;
+}
+
+.kure-login .login-box .form-inputs input::placeholder {
+    color: #959595;
+}
+
+.kure-login .login-box .sub-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 15px;
+}
+
+.kure-login .login-box .sub-controls p {
+    margin-bottom: 0px;
+    font-weight: 100;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.kure-login .login-box .sub-controls p:hover {
+    color: rgba(255,255,255,0.8);
+}
+
+.kure-login .login-box .sub-controls p i {
+    font-size: 20px;
+}
+
+.kure-login .login-box .error-box {
+    background-color: #DD2626;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    border-radius: 5px;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.kure-login .login-box .error-box p {
+    color: #FFFFFF;
+    opacity: 0.5;
+    margin-bottom: 0px;
+    font-weight: 100;
+}
+
+.kure-login .login-box .error-box i {
+    font-size: 18px;
+    color: rgba(245, 245, 245, 0.75);
+}
+
+.kure-login .login-box .form-buttons button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.kure-login .login-box .form-buttons button.main-button {
+    /* #00333C */
+    background-color: #006577;
+    color: rgba(245, 245, 245, 0.75);
+}
+
+.kure-login .login-box .form-buttons button.main-button:hover {
+    background-color: #BCBCBC;
+    color: #006577;
+}
+
+.kure-login .login-box .form-buttons button.sub-button {
+    background: none;
+    color: #FFFFFF;
+    opacity: 0.5;
+    margin-bottom: 40px;
+}
+
+.kure-login .login-box .form-buttons button.sub-button:hover {
+    opacity: 0.75;
+}

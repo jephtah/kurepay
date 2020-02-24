@@ -1,0 +1,354 @@
+body {
+    background-color: #F5F5F5;
+    padding: 40px;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin-bottom: 40px;
+}
+
+.filters button {
+    background-color: #FFFFFF;
+    border: 0.5px solid #94CCDD;
+    border-radius: 5px;
+    color: #418298;
+    font-size: 12px;
+    padding: 12.5px 20px;
+    font-weight: 400;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.filters button.active {
+    color: #FFFFFF;
+    background-color: #418298;
+}
+
+.filter-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0px;
+}
+
+.filter-options .date-range {
+    display: flex;
+}
+
+.filter-options .date-range .date-picker {
+    width: 150px;
+}
+
+.filter-options .date-range .date-picker:first-child {
+    margin-right: 20px;
+}
+
+.filter-options .date-range .date-picker > div {
+    position: relative;
+}
+
+.filter-options .date-range .date-picker label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #418298;
+    margin-bottom: 5px;
+}
+
+.filter-options .date-range .date-picker input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.16);
+    height: 40px;
+    border-radius: 5px;
+    padding: 0px 20px;
+    font-size: 12px;
+    color: #717171;
+}
+
+.filter-options .date-range .date-picker input::-webkit-calendar-picker-indicator {
+    color: red;
+    display: none;
+}
+
+.filter-options .date-range .date-picker i {
+    position: absolute;
+    color: #BCBCBC;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+}
+
+.filter-options .pagi-nation {
+    display: flex;
+    position: relative;
+    margin-left: 20px;
+}
+
+.filter-options .pagi-nation .prev-next {
+    display: flex;
+    margin-right: 10px;
+}
+
+.filter-options .pagi-nation .count-picker p {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-options .pagi-nation .prev-next .arrow-prev,
+.filter-options .pagi-nation .prev-next .arrow-next {
+    width: 24px;
+    height: 40px;
+    background-color: #34495E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filter-options .pagi-nation .prev-next .arrow-next {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.filter-options .pagi-nation .prev-next .arrow-prev {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.filter-options .pagi-nation .prev-next .arrow-prev i,
+.filter-options .pagi-nation .prev-next .arrow-next i {
+    font-size: 20px;
+    color: #F5F5F5;
+}
+
+.filter-options .pagi-nation .page-count {
+    /* width: 50px; */
+    padding: 0px 5px;
+    height: 40px;
+    font-size: 12px;
+    font-weight: 300;
+    color: #717171;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.16);
+}
+
+.filter-options .pagi-nation .page-count p {
+    margin-bottom: 0px;
+}
+
+.filter-options .pagi-nation .count-picker p {
+    font-size: 12px;
+    font-weight: 300;
+    color: #717171;
+    display: flex;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.16);
+    border-radius: 4px;
+    height: 40px;
+    margin-bottom: 0px;
+    padding-left: 5px;
+    padding-right: 2px;
+}
+
+.filter-options .pagi-nation .count-picker p i {
+    font-size: 18px;
+    color: #BCBCBC;
+}
+
+.filter-options .pagi-nation .count-picker ul {
+    list-style-type: none;
+    padding: 0px;
+    position: absolute;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 3px rgba(18,22,28,0.16);
+    padding: 0px;
+    right: 0px;
+    border-radius: 5px;
+    width: 40px;
+    font-size: 12px;
+    color: #717171;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.filter-options .pagi-nation .count-picker ul li {
+    border-bottom: 1px solid #F5F5F5;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.filter-options .pagi-nation .count-picker ul li:hover {
+    background-color: #F5F5F5;
+}
+
+.filter-options .pagi-nation .count-picker ul {
+    display: none;
+}
+
+.filter-options .pagi-nation .count-picker p:hover + ul {
+    display: block;
+}
+
+
+
+
+
+
+.table-section {
+    width: 90%;
+    min-width: 1046px;
+    max-width: 1280px;
+}
+
+.table-section .table-head {
+    height: 45px;
+    border-radius: 5px;
+    background-color: #006577;
+    color: #94CCDD;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding: 0px 20px;
+    padding-left: 50px;
+    margin-bottom: 15px;
+}
+
+.table-section .table-row {
+    height: 40px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    color: #717171;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0px 20px;
+    padding-right: 40px;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.16);
+    margin-bottom: 5px;
+}
+
+.table-section .table-row .details {
+    display: flex;
+    align-items: center;
+}
+
+.table-section p {
+    margin: 0px;
+}
+
+.table-row i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.table-section .one {
+    width: 200px;
+}
+
+.table-section .two {
+    width: 200px;
+}
+
+.table-section .three {
+    width: 140px;
+}
+
+.table-section .four {
+    width: 150px;
+}
+
+.table-section .five {
+    width: 150px;
+}
+
+.table-section .six {
+    width: 80px;
+}
+
+.table-section .expanded {
+    height: 80px;
+}
+
+.table-section .expanded i.arrow {
+    transform: rotate(90deg);
+}
+
+
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding-left: 27.5px;
+}
+
+.actions .action {
+    display: flex;
+    color: #006577;
+}
+
+.actions .action i {
+    font-size: 16px;
+    margin-right: 2.5px;
+}
+
+.actions .action p {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.table-section .red {
+    color: #DD2626;
+}
+
+.table-section .green {
+    color: #12AF0A;
+}
+
+.table-section .green-blue {
+    color: #006577;
+}
+
+.table-section .dud {
+    color: #BCBCBC;
+}
+
+
+button.export {
+    padding: 12.5px 20px;
+    background-color: #FC5D00;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.16);
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 40px;
+    right: 80px;
+}
+
+button.export i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+button.export p {
+    margin: 0px;
+    font-weight: 500;
+}

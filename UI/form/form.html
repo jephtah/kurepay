@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+</body>
+<html>
+
+<head>
+    <title>KPW Forms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <div class="kure-form">
+        <form action="#">
+            <div class="top-form">
+                <p class="form-title">Transfer money to any bank account</p>
+                <p class="form-subtitle">Supported in Nigeria only for now</p>
+            </div>
+            <div class="form-inputs">
+                <div class="text-input">
+                    <label>Text input label here</label>
+                    <input type="text" placeholder="Enter placeholder text here">
+                </div>
+                <div class="text-input">
+                    <label>Text input label here</label>
+                    <input type="text" placeholder="Enter placeholder text here">
+                    <label class="below-input"><i class="material-icons">cancel</i>Remove Beneficiary</label>
+                </div>
+                <div class="text-input">
+                    <label>Number input label here</label>
+                    <input type="number" placeholder="Enter placeholder text here" value="0">
+                    <!-- Remove value if you want the placeholder text to show -->
+                </div>
+                <div class="text-input">
+                    <div class="label-options">
+                        <label><i class="material-icons">radio_button_checked</i>Default input label here</label>
+                        <label class="gray"><i class="material-icons">radio_button_unchecked</i>Choose from
+                            beneficiaries</label>
+                    </div>
+                    <input type="text" placeholder="Enter placeholder text here">
+                    <!-- Place the view that should be loaded when the other option is checked -->
+                </div>
+                <div class="text-input-icon">
+                    <label>Text input with icon</label>
+                    <div>
+                        <input type="text" placeholder="Value shows up here" disabled aria-disabled="disabled">
+                        <i class="material-icons">lock</i>
+                    </div>
+                </div>
+                <div class="text-input-icon">
+                    <label>Text input with colored icon</label>
+                    <div>
+                        <input type="text" placeholder="Enter placeholder text here"
+                            value="0x37ce13d1c688f308795fb4e9e3fb7a4d1ce99446">
+                        <i class="material-icons colored">filter_none</i>
+                    </div>
+                </div>
+                <div class="select-input">
+                    <label>Local Bank</label>
+                    <div>
+                        <select name="local_bank" [(ngModel)]="local_bank">
+                            <option value="0">Choose Bank</option>
+                            <option value="1">Access Bank</option>
+                            <option value="2">Diamond Bank</option>
+                            <option value="3">First Bank of Bank</option>
+                            <option value="4">United Bank of Bank</option>
+                            <option value="5">Zenith Bank</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="otp-code">
+                    <div class="text-input">
+                        <label class="white">Enter the OTP sent to your email</label>
+                        <input type="text" placeholder="Enter OTP">
+                    </div>
+                </div>
+            </div>
+            <div class="kure-form-control">
+                <p class="add-to-form">
+                    <i class="material-icons">add_circle</i>
+                    <span>Add Outline Item</span>
+                </p>
+            </div>
+            <div class="submit-form">
+                <div>
+                    <button>Transfer Money</button>
+                </div>
+                <div class="disabled-button">
+                    <button disabled aria-disabled="true">Sample Disabled Button</button>
+                </div>
+                <div>
+                    <button>Pay With Credit/Debit Card</button>
+                    <p>
+                        <!-- Optional -->
+                        <i class="material-icons">error_outline</i>
+                        <span>You will be redirected to a payment page to pay</span>
+                    </p>
+                </div>
+                <div class="side-text">
+                    <button>Generate OTP Code</button>
+                    <p>OTP timed out<br>Generate new OTP Code</p> <!-- Optional -->
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

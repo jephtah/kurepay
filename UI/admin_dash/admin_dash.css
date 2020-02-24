@@ -1,0 +1,85 @@
+body {
+    background-color: #F5F5F5;
+    padding: 40px;
+    color: #424242;
+}
+
+.cards {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.card {
+    width: 280px;
+    height: 180px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.16);
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-right: 30px;
+}
+
+.card:last-child {
+    margin-right: 0px;
+}
+
+.card .card-content p {
+    margin: 0px;
+    text-align: center;
+}
+
+.card .card-content .value {
+    font-size: 20px;
+    color: #006577;
+    font-weight: 600;
+}
+
+.currency .card .card-content .value {
+    color: #34495E;
+}
+
+.card .card-content .sub-value {
+    font-size: 10px;
+    color: #959595;
+    text-transform: uppercase;
+}
+
+.cards-filter-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin-bottom: 30px;
+}
+
+.cards-filter-title .filter {
+    display: flex;
+    align-items: center;
+}
+
+.cards-filter-title .filter button {
+    background-color: #FFFFFF;
+    border: 0.5px solid #94CCDD;
+    border-radius: 5px;
+    color: #418298;
+    font-size: 12px;
+    padding: 12.5px 20px;
+    font-weight: 400;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.cards-filter-title .filter button.active {
+    color: #FFFFFF;
+    background-color: #418298;
+}
+
+.filter-options {
+    margin-bottom: 0px;
+}
+
+.filter-options .date-range .date-picker:first-child {
+    margin-right: 10px;
+}

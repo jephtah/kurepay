@@ -1,0 +1,200 @@
+.kure-menu {
+    background-color: #006577;
+    padding-top: 40px;
+    width: 100%;
+    height: 100vh;
+    transition: display 5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.kure-menu .kure-container {
+    flex: 1;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.kure-menu .kure-container::-webkit-scrollbar { 
+    display: none;
+}
+
+.kure-menu .kure-logo-box {
+    padding: 0px 30px;
+    margin-bottom: 30px;
+}
+
+.kure-menu .kure-logo-box img {
+    height: 36px;
+    width: 180px;
+}
+
+.kure-menu .kure-menu-items {
+    list-style-type: none;
+    padding: 0px;
+    color: #F5F5F5;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a {
+    color: #F5F5F5;
+    text-decoration: none;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a {
+    display: flex;
+    align-items: center;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a > div {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 10px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items a {
+    justify-content: space-between;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a:hover {
+    background-color: rgba(245, 245, 245, 0.25);
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a div {
+    display: flex;
+    align-items: center;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item a.active {
+    background-color: #F5F5F5;
+    color: #006577;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item .material-icons {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0px;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items ul {
+    display: none;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items ul {
+    list-style-type: none;
+    padding: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items ul a {
+    height: 42px;
+    padding-left: 55px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items a > i.arrow-down {
+    display: none;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items ul a:hover {
+    background-color: rgba(245, 245, 245, 0.25);
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items:hover ul {
+    display: block;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items:hover a > i.arrow-right {
+    display: none;
+}
+
+.kure-menu .kure-menu-items .kure-submenu-items:hover a > i.arrow-down {
+    display: block;
+}
+
+.kure-menu .kure-menu-items .kure-menu-item > .active a.active + ul,
+.kure-menu .kure-menu-items .kure-menu-item > .active a.active > i.arrow-right,
+.kure-menu .kure-menu-items .kure-menu-item > .active a.active > i.arrow-down {
+    display: none;
+}
+
+.calculator {
+    margin-top: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    height: auto;
+    max-height: 150px;
+}
+
+.calculator .logos {
+    padding: 0 15px;
+    height: auto;
+    max-height: 150px;
+    overflow: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.calculator .logos::-webkit-scrollbar { 
+    display: none;
+}
+
+.calculator .logos .logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.calculator .logos .logo img {
+    height: 100%;
+    width: 100%;
+}
+
+.calculator .logos .logo.selected-logo {
+    border: 2px solid #fff;
+}
+
+.calculator .form {
+    width: calc(100% - 70px);
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding-right: 15px;
+}
+
+.calculator .form * {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.calculator .form .result {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .5);
+    line-height: 40px;
+    padding: 0 10px;
+}

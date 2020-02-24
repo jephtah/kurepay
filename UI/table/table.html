@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>KPW Forms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="table.css">
+</head>
+
+<body>
+    <div class="kure-table">
+        <div class="filter-options">
+            <div class="date-range">
+                <div class="date-picker">
+                    <label>Start Date</label>
+                    <div>
+                        <input type="date">
+                        <i class="material-icons">event</i>
+                    </div>
+                </div>
+                <div class="date-picker">
+                    <label>End Date</label>
+                    <div>
+                        <input type="date">
+                        <i class="material-icons">event</i>
+                    </div>
+                </div>
+            </div>
+            <div class="pagi-nation">
+                <div class="prev-next">
+                    <div class="arrow-prev"><i class="material-icons">keyboard_arrow_left</i></div>
+                    <div class="page-count">
+                        <p>6 of 34</p>
+                    </div>
+                    <div class="arrow-next"><i class="material-icons">keyboard_arrow_right</i></div>
+                </div>
+                <div class="count-picker">
+                    <p>40 <i class="material-icons">keyboard_arrow_down</i></p>
+                    <ul>
+                        <li>20</li>
+                        <li>30</li>
+                        <li>40</li>
+                        <li>50</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="table-section">
+            <div class="table-head">
+                <p class="trans-id">Transaction ID</p>
+                <p class="from-to">From/To</p>
+                <p class="amount">Amount (NGN)</p>
+                <p class="status">Status</p>
+                <p class="date">Date</p>
+                <p class="description">Description</p>
+            </div>
+            <div class="table-row">
+                <i class="material-icons success">check_circle</i>
+                <p class="trans-id">1562188276832</p>
+                <p class="from-to"><span class="from-others">[Fr]</span>Baywise Techologies Ltd.</p>
+                <p class="amount">NGN 34,000.00</p>
+                <p class="status">Success</p>
+                <p class="date">Dec 09, 2019</p>
+                <p class="description default-value">No description</p>
+            </div>
+            <div class="table-row">
+                <i class="material-icons success">check_circle</i>
+                <p class="trans-id">1562188276832</p>
+                <p class="from-to"><span class="to-others">[To]</span>Baywise Techologies Ltd.</p>
+                <p class="amount">NGN 34,000.00</p>
+                <p class="status">Success</p>
+                <p class="date">Dec 09, 2019</p>
+                <p class="description default-value">No description</p>
+            </div>
+            <div class="table-row">
+                <i class="material-icons failed">cancel</i>
+                <p class="trans-id">1562188276832</p>
+                <p class="from-to"><span class="from-others">[Fr]</span>Baywise Techologies Ltd.</p>
+                <p class="amount">NGN 34,000.00</p>
+                <p class="status">Failed</p>
+                <p class="date">Dec 09, 2019</p>
+                <p class="description default-value">No description</p>
+            </div>
+            <div class="table-row">
+                <i class="material-icons error">error</i>
+                <p class="trans-id">1562188276832</p>
+                <p class="from-to"><span class="from-others">[Fr]</span>Baywise Techologies Ltd.</p>
+                <p class="amount">NGN 34,000.00</p>
+                <p class="status">Suspended</p>
+                <p class="date">Dec 09, 2019</p>
+                <p class="description default-value">No description</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

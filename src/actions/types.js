@@ -1,0 +1,11 @@
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const LOADING = 'LOADING';
+export const GET_CRYPTO_ADDRESS = 'GET_CRYPTO_ADDRESS'
+export const SET_TOKEN = 'SET_TOKEN'
+export const GET_OTP = 'GET_OTP'
+export const BANK_NAME = 'BANK_NAME'
+export const BANK_NAME_LOADING = 'BANK_NAME_LOADING'
+export const BANK_NAME_ERROR = 'BANK_NAME_ERROR'
+export const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
+export const GET_INVOICES = 'GET_INVOICES'

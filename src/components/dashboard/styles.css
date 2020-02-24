@@ -1,0 +1,224 @@
+.topbar {
+    display: flex;
+    margin-top: 0px;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: bisque; */
+    margin-bottom: 40px;
+    /* height: 50px; */
+    padding: 0px 5px;
+}
+
+.topbar .first h1 {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.dashboard_container {
+    margin-top: 0px;
+    display:flex;
+    min-height: 100vh;
+    background: #f5f5f5;
+}
+
+.dashboard_container .dashboard_left_nav {
+    width: 250px;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.dashboard_container .dashboard_right {
+    width: 100%;
+    padding: 20px 40px;
+    padding-left: 270px;
+}
+
+.user_dashboard {
+    margin: 0;
+}
+
+.user_dashboard {
+    display: flex;
+}
+
+.main_dashboard .buttons,
+.main_dashboard .cards {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.main_dashboard .buttons > a {
+    width: 33.333%;
+    padding: 20px 10px;
+}
+
+@media screen and (max-width: 992px){
+    .main_dashboard .buttons > a {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .dashboard_container .dashboard_right {
+        padding: 20px 40px !important;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .main_dashboard .buttons > a {
+        width: 100%;
+    }
+}
+
+.main_dashboard .buttons > a > button {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F5F5F5;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin: 0;
+}
+
+.main_dashboard .buttons > a > button i {
+    margin-right: 10px;
+}
+
+.user_dashboard .left {
+    margin-right: 80px;
+}
+
+.user_dashboard .right {
+    width: 400px;
+}
+
+.user_dashboard .tab-headline {
+    color: #424242;
+    margin-bottom: 30px;
+}
+
+.user_dashboard .tab-headline p {
+    margin-bottom: 0px;
+    line-height: 120%;
+}
+
+.user_dashboard .tab-headline p.sub-title {
+    font-size: 12px;
+    font-weight: 300;
+    color: #DD2626
+}
+
+.mobile {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .mobile {
+        display: block;
+        background: #006577;
+        position: absolute;
+        top: 36.5px;
+        padding: 7.5px 5px 7.5px 2.5px;
+        cursor: pointer;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        z-index: 90909090;
+    }
+
+    .mobile p {
+        display: block;
+        background-color: #F5F5F5;
+        height: 3px;
+        width: 24px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+    }
+
+    .mobile p:last-child {
+        margin-bottom: 0px;
+    }
+
+    .dashboard_container .dashboard_left_nav {
+        display: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+    }
+
+    .dashboard_container .mobile-menu {
+        display: block;
+        z-index: 909090;
+    }
+
+    .user_dashboard .left {
+        margin-right: 40px;
+    }
+
+    .user_dashboard .right {
+        width: 100%;
+    }
+
+    .topbar {
+        padding: 0px;
+    }
+
+    .dashboard_container .dashboard_right .main_dashboard {
+        height: calc(100% - 100px);
+        overflow-y: scroll;
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard_container .dashboard_right {
+        padding: 20px;
+    }
+
+    .topbar {
+        margin-bottom: 20px;
+    }
+
+    .topbar .first h1 {
+        margin-left: 20px;
+    }
+
+    .user_dashboard {
+        flex-direction: column;
+        padding: 0px 2.5px;
+        overflow-y: scroll;
+    }
+
+    .user_dashboard .left {
+        margin-right: 0px;
+        margin-bottom: 40px;
+        align-self: center;
+    }
+
+    .user_dashboard .right {
+        padding-bottom: 40px;
+    }
+
+    .main_dashboard .buttons,
+    .main_dashboard .cards {
+        flex-direction: column;
+    }
+
+    .main_dashboard .buttons {
+        margin-bottom: 40px;
+    }
+
+    .main_dashboard .buttons a > button {
+        width: 100%;
+    }
+
+    .row {
+        margin: 0;
+    }
+}
