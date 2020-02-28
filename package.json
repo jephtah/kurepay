@@ -22,8 +22,8 @@
     "serve": "^11.3.0"
   },
   "scripts": {
-    "start": "serve build/ -l 8085 --ssl-cert /etc/letsencrypt/live/demo-wallet.kurepay.com/fullchain.pem  --ssl-key /etc/letsencrypt/live/demo-wallet.kurepay.com/privkey.pem",
-    "startt": "react-scripts start",
+    "startt": "serve build/ -l 8085 --ssl-cert /etc/letsencrypt/live/demo-wallet.kurepay.com/fullchain.pem  --ssl-key /etc/letsencrypt/live/demo-wallet.kurepay.com/privkey.pem",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

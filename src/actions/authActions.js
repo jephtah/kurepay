@@ -205,6 +205,7 @@ export const completeReset = (password, token, history) => dispatch => {
 
 //Set logged in user
 export const setCurrentUser = (decoded, token) => dispatch => {
+  console.log(decoded)
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded
