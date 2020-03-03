@@ -6,7 +6,7 @@ import Routes from './routes'
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logoutUser } from './actions/authActions'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -44,9 +44,9 @@ function App () {
   return (
     <div className='App'>
       <Provider store={store}>
-        <HashRouter>
+        <Router>
           <Routes />
-        </HashRouter>
+        </Router>
       </Provider>
     </div>
   )
