@@ -41,7 +41,7 @@ const Routes = () => {
       <Route component={Dashboard} path='/dashboard' />
       <Route component={EditProfile} path='/edit-profile' />
       <Route component={ChangePassword} path='/change-password' />
-      <Route exact component={Login} path='/' />
+      <Route exact component={Login} path='/login' />
       <Route component={Register} path='/register' />
       <Route component={Verify} path='/verify' />
       <Route component={Forgot} path='/forgot-password' />
