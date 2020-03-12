@@ -29,9 +29,6 @@ class Topbar extends Component {
 
     const { firstname, lastname, localCurrency, referralID, balance } = user
 
-    console.log(lastname)
-    console.log(user)
-
     const details = {
       balance: balance,
       curr: localCurrency,

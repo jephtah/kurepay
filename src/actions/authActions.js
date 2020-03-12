@@ -20,7 +20,6 @@ export const registerUser = (userData, history) => dispatch => {
   axios
     .post(`${BASE_URL}/users/signup`, userData)
     .then(res => {
-      console.log(res.data)
       history.push('/verify')
     })
     .catch(err => {
@@ -53,7 +52,6 @@ export const loginUser = (userData, history) => dispatch => {
   axios
     .post(`${BASE_URL}/users/login`, userData)
     .then(async res => {
-      //   console.log(res.data)
       const { token } = res.data
       localStorage.setItem('jwtToken', token)
       await setAuthToken(token)
@@ -78,12 +76,9 @@ export const loginUser = (userData, history) => dispatch => {
 }
 
 export const fetchUser = history => dispatch => {
-  // console.log('fetch')
-
   axios
     .get(`${BASE_URL}/users/fetch`)
     .then(async res => {
-      console.log(res.data)
       // const { token } = localStorage
       await dispatch(setCurrentUser(res.data.data, res.data.data.token))
       localStorage.setItem('token', res.data.data.token)
@@ -142,7 +137,6 @@ export const reset = (email, history) => dispatch => {
   axios
     .post(`${BASE_URL}/users/reset`, { email })
     .then(async res => {
-      console.log(res.data)
       dispatch({
         type: GET_ERRORS,
         payload: { message: res.data.message || res.data.error }
@@ -165,7 +159,6 @@ export const reset = (email, history) => dispatch => {
 }
 
 export const completeReset = (password, token, history) => dispatch => {
-  console.log(token)
   dispatch({
     type: LOADING,
     payload: true
@@ -179,7 +172,6 @@ export const completeReset = (password, token, history) => dispatch => {
   axios
     .post(`${BASE_URL}/users/password`, { password, token })
     .then(async res => {
-      console.log(res.data)
       if (!res.data.status)
         dispatch({
           type: GET_ERRORS,
@@ -205,7 +197,6 @@ export const completeReset = (password, token, history) => dispatch => {
 
 //Set logged in user
 export const setCurrentUser = (decoded, token) => dispatch => {
-  console.log(decoded)
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded
@@ -219,7 +210,6 @@ export const setCurrentUser = (decoded, token) => dispatch => {
 
 // Log user out
 export const logoutUser = () => dispatch => {
-  console.log('logoutUser')
   // Remove token from localStorage
   localStorage.removeItem('jwtToken')
   // Remove auth header for future requests
@@ -245,7 +235,6 @@ export const changePassword = data => dispatch => {
     .patch(`${BASE_URL}/users/update`, data)
     .then(res => {
       const { data } = res
-      console.log(data)
       alert('Password Changed Successfully')
     })
     .catch(err =>

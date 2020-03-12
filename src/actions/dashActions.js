@@ -27,8 +27,7 @@ export const fundWithCard = amount => dispatch => {
   axios
     .post(`${BASE_URL}/fundWallet/credit_card`, { amount })
     .then(res => {
-      console.warn(res)
-      window.location = res.data.paymenturl
+      window.location = res.data.result.paymenturl
     })
     .catch(err =>
       dispatch({
