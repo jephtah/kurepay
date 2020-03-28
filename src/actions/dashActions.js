@@ -65,7 +65,6 @@ export const fundWithCrypto = crypto => dispatch => {
   axios
     .post(`${BASE_URL}/fundWallet/address`, crypto)
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: GET_CRYPTO_ADDRESS,
         payload: res.data.message

@@ -35,7 +35,6 @@ class Crypto extends Component {
   }
 
   submitForm = event => {
-    console.log('submit')
     if (event) event.preventDefault()
 
     const { selectedCrypto } = this.state
