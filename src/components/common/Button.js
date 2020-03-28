@@ -7,7 +7,7 @@ const Button = (props) => {
         outline: 'none'
     }
     return (
-        <button {...props} style={style} type="submit">{props.text}</button>
+        <button type="button"  {...props} style={style} type="submit">{props.text}</button>
     )
 }
 

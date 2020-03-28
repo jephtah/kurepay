@@ -178,7 +178,9 @@ export const transferToCrypto = data => dispatch => {
     })
 }
 
-export const transferToWallet = data => dispatch => {
+export const transferToWallet = (data, save) => dispatch => {
+  console.log(data)
+  console.log(save)
   dispatch({
     type: LOADING,
     payload: true
@@ -214,6 +216,21 @@ export const transferToWallet = data => dispatch => {
         payload: false
       })
     })
+    if(save){
+        const datum = {
+       
+        name: data.email
+       
+      }
+      console.log(datum)
+  
+      axios
+        .post(`${BASE_URL}/users/beneficiary`, datum)
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(err => console.log(err.response))
+    }
 }
 
 export const getOTP = () => dispatch => {
@@ -533,9 +550,13 @@ export const addInvoice = data => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response
-          ? err.response.data
+          ? err.response.data.message
           : { message: 'Something went wrong. Please try again' }
       })
+     // console.log(err)
+    //  {
+    //    console.log(err.response.data)
+    //  }
     )
     .finally(() => {
       dispatch({

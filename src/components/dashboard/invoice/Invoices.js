@@ -21,9 +21,10 @@ class Invoices extends React.Component {
         let headers = []
 
         if (this.props.invoices.length < 1){
-            headers = ['invoice id', 'receiver email', 'due Date', 'created date']
+            headers = ['Invoice ID', 'receiver email', 'due Date', 'created date']
         } else {
             for (let invoice in filtered[0]) {
+                
                 headers.push(invoice)
             }
         }
@@ -56,9 +57,10 @@ class Invoices extends React.Component {
         const { invoices } = this.props
         console.log(invoices)
 
-        const formatted = await invoices.map(invoice => {
+        const formatted = await invoices.map((invoice,index) => {
+            let i =0
             const formatted = {
-                'invoice id': invoice.invoiceId,
+                'Invoice ID': invoice._id,
                 'receiver email': invoice.receiver_mail,
                 'due date': new Date(invoice.due_date).toDateString(),
                 'created date': new Date(invoice.createdAt).toDateString(),

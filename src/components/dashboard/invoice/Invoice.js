@@ -120,10 +120,11 @@ class Invoice extends Component {
   }
 
   submitForm = (event) => {
+    console.log("cc")
     event.preventDefault();
     const { receiverName, receiverEmail, dueDate, items } = this.state;
 
-    const data = {
+    const data = {      
       receiver_name: receiverName.value,
       receiver_mail: receiverEmail.value,
       due_date: dueDate.value,
@@ -139,6 +140,10 @@ class Invoice extends Component {
       && receiverEmail.value !== ''
       && dueDate.value !== ''
       && items.length > 0) this.props.addInvoice(data)
+      // && items[0].title.value !==''
+      // && items[0].description.value !==''
+      // && items[0].amount.value !==''
+      // && items[0].quantity.value !==''
   }
 
   updateForm = (key, value, index = null) => {
