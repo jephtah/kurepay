@@ -13,11 +13,19 @@ class Transactions extends React.Component {
         filtered: [],
         headers: [],
         data: [],
+        data2:[],
         filterDate: '',
         minPage: 0,
         maxPage: 0,
         filterType: '',
         filterCategory: '',
+        minPage: 0,
+        maxPage: 0,
+        page: 1,
+        page_2:0,
+        pageCount:0,
+        currentpage:0,
+        total_no_data:2,
     }
 
     populateHeaders = () => {
@@ -25,7 +33,7 @@ class Transactions extends React.Component {
         let headers = []
 
         if (this.props.transactions.length < 1){
-            headers = ['', 'transactionId', 'from/to', 'amount', 'status', 'date', 'category']
+            headers = ['', 'transaction Id', 'from/to', 'amount', 'status', 'date', 'category']
         } else {
             for (let transaction in filtered[0]){
                 headers.push(transaction)
@@ -37,10 +45,15 @@ class Transactions extends React.Component {
 
     populateData = () => {
         let { filtered } = this.state
-        let { maxPage, minPage } = this.state
+        let filtered2 = []
+        for(var i=0;i<this.state.total_no_data;i++){
+            filtered2.push(filtered[i])
+        }
+       
         let data = []
+        let data2 = []
 
-        for (let row of filtered){
+        for (let row of filtered2){
             let transaction = []
             for (let column in row) {
                 transaction.push(row[column])
@@ -48,12 +61,26 @@ class Transactions extends React.Component {
             data.push(transaction)
         }
 
-        if (filtered.length < 20) maxPage = filtered.length
-        else maxPage = 20
+        for (let row of filtered) {
+            let transaction2 = []
+            for (let column in row) {
+                transaction2.push(row[column])
+            }
+           
+            data2.push(transaction2)
+        }
+
+        if(Math.ceil(filtered.length/this.state.total_no_data)==0){
+            this.state.pageCount = 1
+           }
+           else{
+            this.state.pageCount = Math.ceil(filtered.length/this.state.total_no_data)
+           }
+           
 
 
-        this.paginate(minPage)
-        this.setState({ maxPage, data })
+        
+           this.setState({ data2,data})
     }
 
     formatData = async () => {
@@ -63,21 +90,24 @@ class Transactions extends React.Component {
         formatted = await transactions.map(transaction => {
             const { transactionId, from, to, originalAmount, receivedAmount, receivedCurrency, sentCurrency, status, updatedAt, transactionType } = transaction
             const statuses = ['Pending', 'Confirmed', 'Cancelled']
-            const types = ['Wallet To Wallet', 'Wallet To Bank', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies']
+            const types = ['Wallet To Wallet', 'Wallet To Bank', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies','Airtime']
             const isSender = from === this.props.user.email
+            //const isSender = to === this.props.user.email
             const amountSent = `${sentCurrency} ${originalAmount}`
             const amountReceived = `${receivedCurrency} ${receivedAmount}`
+            
 
             const formatted = {
                 '': isSender ? 'Debit' : 'Credit',
                 transactionId,
-                'from/to': isSender ? to : from,
+                'from/to': transaction.initiator,
                 amount: isSender ? amountSent : amountReceived,
-                status: statuses[status - 1],
+                status: transaction.status,
                 date: new Date(updatedAt).toDateString(),
-                category: types[transactionType - 1]
+                category: transaction.description
             }
-            
+            console.log(this.props)
+            console.log(transaction)
             return formatted
         })
 
@@ -106,19 +136,70 @@ class Transactions extends React.Component {
     }
 
     go = index => {
-        const pageCount = this.props.transactions.length
-        let { minPage, maxPage } = this.state
-
-        if (maxPage > 20){
-            if (maxPage < pageCount - index) maxPage += index
-            else maxPage = pageCount
+        
+        console.log(this.state.pageCount)
+        if(this.state.page+1<=this.state.pageCount){
+            this.state.currentpage = this.state.currentpage + index
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+           if(this.state.page==this.state.pageCount-1){
+            
+          let left =    this.state.data2.length-(this.state.total_no_data*this.state.currentpage)
+          console.log(left)
+          let k = 1
+          for(var i=0;i<left;i++){
+            filtdata.push(this.state.data2[this.state.data2.length-k])
+            k = k+1
+          }
+           }
+           else{
+            
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+               // console.log(i)
+                 filtdata.push(this.state.data2[i+1])
+             }
+           }
+           
+            
+             
+             this.state.data = filtdata
         }
-
-        if (minPage > 20 && minPage < pageCount - index) minPage += index
-
-        this.setState({ maxPage, minPage })
-        this.paginate(minPage)
+        else{
+            //console.log("jj")
+        }
+      
+   
     }
+
+    prev = index => {
+      console.log(this.state.currentpage)
+        
+        if(this.state.currentpage>=1){
+            this.state.currentpage = this.state.currentpage+ index
+ 
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+              // console.log(i)
+                filtdata.push(this.state.data2[i])
+            }
+            
+             
+             this.state.data = filtdata
+        }
+       
+    
+     }
 
     paginate = (minPage) => {
         let { data } = this.state
@@ -173,9 +254,9 @@ class Transactions extends React.Component {
 
     render(){
         const {
-            headers, data, filterDate, minPage, maxPage, filterType, filterCategory
+            headers, data, filterDate,page, pageCount, minPage, maxPage, filterType, filterCategory
         } = this.state
-        const types = ['All', 'Wallet To Wallet', 'Wallet To Bank', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies']
+        const types = ['All', 'Wallet to Wallet Transfer', 'Wallet to Bank Transfer', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies','Airtime']
 
         return (
             <DashboardLayout history={this.props.history}>
@@ -220,23 +301,17 @@ class Transactions extends React.Component {
                             </div>
                         {/* </div> */}
                         <div className="pagi-nation">
-                            <div className="prev-next">
-                                <div className="arrow-prev" onClick={() => this.go(-20)}><i className="material-icons">keyboard_arrow_left</i></div>
-                                <div className="page-count">
-                                    <p>{minPage} - {maxPage} of {this.state.filtered.length}</p>
-                                </div>
-                                <div className="arrow-next" onClick={() => this.go(20)}><i className="material-icons">keyboard_arrow_right</i></div>
+                        <div className="prev-next">
+                            <div className="arrow-prev" onClick={() => this.prev(-1)}><i className="material-icons">keyboard_arrow_left</i></div>
+                            <div className="page-count">
+                                <p>{page} of {pageCount}</p>
                             </div>
-                            {/* <div className="count-picker">
-                                <p>40 <i className="material-icons">keyboard_arrow_down</i></p>
-                                <ul>
-                                    <li>20</li>
-                                    <li>30</li>
-                                    <li>40</li>
-                                    <li>50</li>
-                                </ul>
-                            </div> */}
+                            <div className="arrow-next" onClick={() => this.go(1)}><i className="material-icons">keyboard_arrow_right</i></div>
                         </div>
+                        <div className="count-picker">
+                           
+                        </div>
+                    </div>
                     </div>
                     <Table headers={headers} data={data} title="Transactions" />
                 </div>

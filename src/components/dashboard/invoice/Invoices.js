@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-
+import Pagination from '../../pagination';
 import Table from '../../common/Table'
 import { getInvoices } from '../../../actions/dashActions'
 
@@ -10,10 +10,19 @@ class Invoices extends React.Component {
         filtered: [],
         headers: [],
         data: [],
+        data2:[],
+        data_final:[],
         filterDueDate: '',
         filterCreatedDate: '',
+      // filterRecieverName:'',
         minPage: 0,
         maxPage: 0,
+        page: 1,
+        page_2:0,
+        pageCount:0,
+        currentpage:0,
+        total_no_data:2,
+        
     }
 
     populateHeaders = () => {
@@ -21,7 +30,7 @@ class Invoices extends React.Component {
         let headers = []
 
         if (this.props.invoices.length < 1){
-            headers = ['Invoice ID', 'receiver email', 'due Date', 'created date']
+            headers = ['Invoice ID', 'receiver Name', 'due Date', 'created date']
         } else {
             for (let invoice in filtered[0]) {
                 
@@ -34,24 +43,46 @@ class Invoices extends React.Component {
 
     populateData = () => {
         let { filtered } = this.state
-        let { maxPage, minPage } = this.state
-        let data = []
+        let filtered2 = []
+       for(var i=0;i<this.state.total_no_data;i++){
+           filtered2.push(filtered[i])
+       }
 
-        for (let row of filtered) {
+       
+
+        
+        let data = []
+        let data2 = []
+
+        for (let row of filtered2) {
             let invoice = []
             for (let column in row) {
                 invoice.push(row[column])
             }
+           
             data.push(invoice)
         }
 
-        if (filtered.length < 20) maxPage = filtered.length
-        else maxPage = 20
-
-
-        this.paginate(minPage)
-        this.setState({ maxPage, data })
-    }
+        for (let row of filtered) {
+            let invoice2 = []
+            for (let column in row) {
+                invoice2.push(row[column])
+            }
+           
+            data2.push(invoice2)
+        }
+    
+       if(Math.ceil(filtered.length/this.state.total_no_data)==0){
+        this.state.pageCount = 1
+       }
+       else{
+        this.state.pageCount = Math.ceil(filtered.length/this.state.total_no_data)
+       }
+       
+       this.state.page_2 = filtered2.length
+        
+       this.setState({ data2,data})
+     }
 
     formatData = async () => {
         const { invoices } = this.props
@@ -61,9 +92,9 @@ class Invoices extends React.Component {
             let i =0
             const formatted = {
                 'Invoice ID': invoice._id,
-                'receiver email': invoice.receiver_mail,
-                'due date': new Date(invoice.due_date).toDateString(),
-                'created date': new Date(invoice.createdAt).toDateString(),
+                'receiver_name': invoice.receiver_name,
+                'due_date': new Date(invoice.due_date).toDateString(),
+                'created_date': new Date(invoice.createdAt).toDateString(),
             }
 
             return formatted;
@@ -94,19 +125,70 @@ class Invoices extends React.Component {
     }
 
     go = index => {
-        const pageCount = this.props.invoices.length
-        let { minPage, maxPage } = this.state
-
-        if (maxPage > 20) {
-            if (maxPage < pageCount - index) maxPage += index
-            else maxPage = pageCount
+        
+        console.log(this.state.pageCount)
+        if(this.state.page+1<=this.state.pageCount){
+            this.state.currentpage = this.state.currentpage + index
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+           if(this.state.page==this.state.pageCount-1){
+            
+          let left =    this.state.data2.length-(this.state.total_no_data*this.state.currentpage)
+          console.log(left)
+          let k = 1
+          for(var i=0;i<left;i++){
+            filtdata.push(this.state.data2[this.state.data2.length-k])
+            k = k+1
+          }
+           }
+           else{
+            
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+               // console.log(i)
+                 filtdata.push(this.state.data2[i+1])
+             }
+           }
+           
+            
+             
+             this.state.data = filtdata
         }
-
-        if (minPage > 20 && minPage < pageCount - index) minPage += index
-
-        this.setState({ maxPage, minPage })
-        this.paginate(minPage)
+        else{
+            //console.log("jj")
+        }
+      
+   
     }
+
+    prev = index => {
+      console.log(this.state.currentpage)
+        
+        if(this.state.currentpage>=1){
+            this.state.currentpage = this.state.currentpage+ index
+ 
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+              // console.log(i)
+                filtdata.push(this.state.data2[i])
+            }
+            
+             
+             this.state.data = filtdata
+        }
+       
+    
+     }
 
     paginate = (minPage) => {
         let { data } = this.state
@@ -119,13 +201,18 @@ class Invoices extends React.Component {
 
     filterDueDate = filterDueDate => {
         const { invoices } = this.state
+       console.log(filterDueDate)
         let filtered = []
 
         if (filterDueDate !== '') {
             invoices.forEach(invoice => {
-                if (new Date(invoice.dueDate).toDateString() === new Date(filterDueDate).toDateString()) filtered.push(invoice)
+                console.log(new Date(invoice.due_date).toDateString())
+               //console.log(invoice)
+                console.log(new Date(filterDueDate).toDateString())
+                if (new Date(invoice.due_date).toDateString() === new Date(filterDueDate).toDateString()) filtered.push(invoice)
             })
-        } else filtered = invoices
+        } 
+        else filtered = invoices
 
         this.setState({ filterDueDate, filtered }, this.populateData)
     }
@@ -136,16 +223,34 @@ class Invoices extends React.Component {
 
         if (filterCreatedDate !== '') {
             invoices.forEach(invoice => {
-                if (new Date(invoice.createdAt).toDateString() === new Date(filterCreatedDate).toDateString()) filtered.push(invoice)
+                if (new Date(invoice.created_date).toDateString() === new Date(filterCreatedDate).toDateString()) filtered.push(invoice)
             })
         } else filtered = invoices
 
         this.setState({ filterCreatedDate, filtered }, this.populateData)
     }
 
+    filterRecieverName = filtername => {
+        const { invoices } = this.state
+        let filtered = []
+      //  console.log(filtername)
+
+        if (filtername !== '') {
+            invoices.forEach(invoice => {
+                console.log(invoice.receiver_name)
+                console.log(filtername)
+              if (invoice.receiver_name.toLowerCase() === filtername) filtered.push(invoice)
+            })
+        } else filtered = invoices
+
+        this.setState({ filtername, filtered }, this.populateData)
+    }
+
+    
+
     render() {
         const {
-            headers, data, filterDueDate, minPage, maxPage, filterCreatedDate
+            headers, data, filterRecieverName, filterDueDate, page_2, page, pageCount,minPage, maxPage, filterCreatedDate
         } = this.state
 
         return (
@@ -167,6 +272,13 @@ class Invoices extends React.Component {
                                     <i className="material-icons">event</i>
                                 </div>
                             </div>
+                            <div className="date-picker">
+                                <label>Filter By Reciever Name</label>
+                                <div>
+                                    <input type="text" value={filterRecieverName} onChange={e => this.filterRecieverName(e.target.value)} />
+                                  
+                                </div>
+                            </div>
                             {/* <div className="date-picker">
                                 <label>End Date</label>
                                 <div>
@@ -178,21 +290,15 @@ class Invoices extends React.Component {
                     </div>
                     <div className="pagi-nation">
                         <div className="prev-next">
-                            <div className="arrow-prev" onClick={() => this.go(-20)}><i className="material-icons">keyboard_arrow_left</i></div>
+                            <div className="arrow-prev" onClick={() => this.prev(-1)}><i className="material-icons">keyboard_arrow_left</i></div>
                             <div className="page-count">
-                                <p>{minPage} - {maxPage} of {this.state.filtered.length}</p>
+                                <p>{page} of {pageCount}</p>
                             </div>
-                            <div className="arrow-next" onClick={() => this.go(20)}><i className="material-icons">keyboard_arrow_right</i></div>
+                            <div className="arrow-next" onClick={() => this.go(1)}><i className="material-icons">keyboard_arrow_right</i></div>
                         </div>
-                        {/* <div className="count-picker">
-                            <p>40 <i className="material-icons">keyboard_arrow_down</i></p>
-                            <ul>
-                                <li>20</li>
-                                <li>30</li>
-                                <li>40</li>
-                                <li>50</li>
-                            </ul>
-                        </div> */}
+                        <div className="count-picker">
+                           
+                        </div>
                     </div>
                 </div>
                 <Table headers={headers} data={data} title="Invoices" />
