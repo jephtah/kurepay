@@ -215,8 +215,13 @@ class Bank extends Component {
         axios
             .get(`${BASE_URL}/users/beneficiary`)
             .then(res => {
-                console.log(res.data)
-                this.setState({ beneficiaries: res.data.data })
+                let benefiCiaries = []
+                res.data.data.forEach(beneficiaries => {
+                    
+                    if (beneficiaries.service === "payment_bank") benefiCiaries.push(beneficiaries)
+                })
+               
+                this.setState({ beneficiaries: benefiCiaries })
             })
             .catch(err => {
                 console.log(err.response)

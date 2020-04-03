@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import Pagination from '../../pagination';
 import Table from '../../common/Table'
 import { getInvoices } from '../../../actions/dashActions'
+
 
 class Invoices extends React.Component {
     state = {
@@ -37,7 +37,7 @@ class Invoices extends React.Component {
                 headers.push(invoice)
             }
         }
-
+        console.log(this.props.invoices.lengt)
         this.setState({ headers })
     }
 
@@ -86,6 +86,7 @@ class Invoices extends React.Component {
 
     formatData = async () => {
         const { invoices } = this.props
+        console.log(this.props)
         console.log(invoices)
 
         const formatted = await invoices.map((invoice,index) => {
@@ -239,7 +240,7 @@ class Invoices extends React.Component {
             invoices.forEach(invoice => {
                 console.log(invoice.receiver_name)
                 console.log(filtername)
-              if (invoice.receiver_name.toLowerCase() === filtername) filtered.push(invoice)
+              if (invoice.receiver_name.toLowerCase() === filtername.toLowerCase()) filtered.push(invoice)
             })
         } else filtered = invoices
 

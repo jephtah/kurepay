@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import axios from 'axios';
 import Popup from '../../common/Popup';
 import './beneficiaries.css'
+import axios from 'axios';
 import { BASE_URL } from "../../../config/constants";
 import Button from '../../common/Button';
 import Input from '../../common/Input';
@@ -77,7 +77,7 @@ class Wallet extends Component {
             this.props.transferToWallet({
                 token: otp.value,
                 amount: amount.value,
-                email: email.value
+                email: email.value,
             },this.state.save)
         } else this.props.getOTP()
     }
@@ -95,8 +95,13 @@ class Wallet extends Component {
         axios
             .get(`${BASE_URL}/users/beneficiary`)
             .then(res => {
-                console.log(res.data)
-                this.setState({ beneficiaries: res.data.data })
+                let benefiCiaries = []
+                res.data.data.forEach(beneficiaries => {
+                    
+                    if (beneficiaries.service === "payment_wallet") benefiCiaries.push(beneficiaries)
+                })
+               
+                this.setState({ beneficiaries: benefiCiaries })
             })
             .catch(err => {
                 console.log(err.response)
@@ -173,7 +178,7 @@ class Wallet extends Component {
                                 </div> : <div className="beneficiaries">
                                     {this.state.beneficiaries.map(item => (
                                         <p onClick={() => this.selectBeneficiary(item)} key={item._id} className="item">
-                                            {item.name} - {item.number}
+                                            Email - {item.name} 
                                         </p>
                                     ))}
                                 </div>}

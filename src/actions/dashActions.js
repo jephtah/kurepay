@@ -9,7 +9,12 @@ import {
   BANK_NAME_ERROR,
   BANK_NAME_LOADING,
   GET_TRANSACTIONS,
-  GET_INVOICES
+  GET_INVOICES,
+  GET_REFERRALS,
+  GET_BUNDLE_NETWORK,
+  GET_DATA_AVAILABLE,
+
+
 } from './types'
 import { BASE_URL } from '../config/constants'
 
@@ -127,7 +132,9 @@ export const transferToBank = (data, save) => (dispatch, store) => {
     const datum = {
       number: data.accountNumber,
       name: store().dashboard.bankName,
-      code: data.bankCode
+      code: data.bankCode,
+      service: "payment_bank",
+
     }
     console.log(datum)
 
@@ -218,9 +225,8 @@ export const transferToWallet = (data, save) => dispatch => {
     })
     if(save){
         const datum = {
-       
-        name: data.email
-       
+        name: data.email,
+        service: "payment_wallet",
       }
       console.log(datum)
   
@@ -275,7 +281,8 @@ export const removeOTP = () => ({
   payload: false
 })
 
-export const buyAirtime = data => dispatch => {
+export const buyAirtime = (data,save) => dispatch => {
+  console.log(save)
   dispatch({
     type: LOADING,
     payload: true
@@ -305,10 +312,26 @@ export const buyAirtime = data => dispatch => {
         payload: false
       })
     })
+
+    if(save){
+      const datum = {
+      number:data.phone,
+      name:data.phone,
+      service: "payment_airtime_data",
+    }
+    console.log(datum)
+
+    axios
+      .post(`${BASE_URL}/users/beneficiary`, datum)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.response))
+  }
 }
 
-export const buyData = data => dispatch => {
-  console.log(data)
+export const buyData = (data,save) => dispatch => {
+  console.log(save)
   dispatch({
     type: LOADING,
     payload: true
@@ -339,6 +362,22 @@ export const buyData = data => dispatch => {
         payload: false
       })
     })
+
+    if(save){
+      const datum = {
+      number:data.phone,
+      name:data.phone,
+      service: "payment_airtime_data",
+    }
+    console.log(datum)
+
+    axios
+      .post(`${BASE_URL}/users/beneficiary`, datum)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.response))
+  }
 }
 
 export const payElectricity = data => dispatch => {
@@ -491,6 +530,7 @@ export const getTransactions = () => (dispatch, store) => {
 }
 
 export const getInvoices = () => (dispatch, store) => {
+  console.log("kk")
   dispatch({
     type: LOADING,
     payload: true
@@ -509,6 +549,45 @@ export const getInvoices = () => (dispatch, store) => {
 
       dispatch({
         type: GET_INVOICES,
+        payload: data.data
+      })
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data
+          : { message: 'Something went wrong. Please try again' }
+      })
+    )
+    .finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    })
+}
+
+
+export const getReferals = () => (dispatch, store) => {
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  })
+
+  axios
+    .get(`${BASE_URL}/users/referrals`)
+    .then(async res => {
+      const { data } = res
+      console.log(data)
+
+      dispatch({
+        type: GET_REFERRALS,
         payload: data.data
       })
     })
@@ -565,3 +644,94 @@ export const addInvoice = data => dispatch => {
       })
     })
 }
+
+
+export const getServices = () => (dispatch, store) => {
+ 
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  })
+
+  axios
+    .get(`${BASE_URL}/utilities/service`)
+    .then(res => {
+      const { data } = res
+      const myArray = data.data
+      const newArray = myArray.filter(element => element.name =='Data'||element.name =='data');
+      console.log(newArray);
+      axios.get(`${BASE_URL}/utilities/service/`+newArray[0].id)
+      .then(res2=>{  
+        console.log(res2.data.data.service_categories)
+        dispatch({
+          type: GET_DATA_AVAILABLE,
+          payload: res2.data.data.service_categories
+        })
+      })
+      
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data
+          : { message: 'Something went wrong. Please try again' }
+      })
+    )
+    .finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    })
+}
+
+
+
+export const getDataBundle = (id) => (dispatch, store) => {
+ 
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  })
+
+  axios
+    .post(`${BASE_URL}/utilities/serviceproduct/`+id)
+    .then(res => {
+      console.log(res)
+      dispatch({
+        type: GET_BUNDLE_NETWORK,
+        payload: 'll'
+      })
+      
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data
+          : { message: 'Something went wrong. Please try again' }
+      })
+    )
+    .finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    })
+}
+
+
+
+
+

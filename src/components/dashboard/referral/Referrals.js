@@ -1,62 +1,123 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import Table from '../../common/Table'
+import { getReferals } from '../../../actions/dashActions'
 
-class Referrals extends React.Component {
+class Refferals extends React.Component {
     state = {
-        referrals: null,
+        invoices: null,
+        filtered: [],
         headers: [],
         data: [],
-        filterDate: '',
+        data2:[],
+        data_final:[],
+        filterDueDate: '',
+        filterCreatedDate: '',
+      // filterRecieverName:'',
+        minPage: 0,
+        maxPage: 0,
         page: 1,
-        pageCount: 34,
+        page_2:0,
+        pageCount:0,
+        currentpage:0,
+        total_no_data:2,
+        
     }
 
     populateHeaders = () => {
-        let { referrals } = this.state
+        let { filtered } = this.state
         let headers = []
 
-        for (let referral in referrals[0]) {
-            headers.push(referral)
+        if (this.props.invoices.length < 1){
+            headers = ['Name', 'Email', 'Amount', 'Date']
+        } else {
+            for (let invoice in filtered[0]) {
+                
+                headers.push(invoice)
+            }
         }
-
+        console.log(this.props.invoices.length)
         this.setState({ headers })
     }
 
     populateData = () => {
-        let { referrals } = this.state
-        let data = []
+        let { filtered } = this.state
+        let filtered2 = []
+       for(var i=0;i<this.state.total_no_data;i++){
+           filtered2.push(filtered[i])
+       }
 
-        for (let row of referrals) {
-            let referral = []
+       
+
+        
+        let data = []
+        let data2 = []
+
+        for (let row of filtered2) {
+            let invoice = []
             for (let column in row) {
-                referral.push(row[column])
+                invoice.push(row[column])
             }
-            data.push(referral)
+           
+            data.push(invoice)
         }
 
-        this.setState({ data })
+        for (let row of filtered) {
+            let invoice2 = []
+            for (let column in row) {
+                invoice2.push(row[column])
+            }
+           
+            data2.push(invoice2)
+        }
+    
+       if(Math.ceil(filtered.length/this.state.total_no_data)==0){
+        this.state.pageCount = 1
+       }
+       else{
+        this.state.pageCount = Math.ceil(filtered.length/this.state.total_no_data)
+       }
+       
+       this.state.page_2 = filtered2.length
+        
+       this.setState({ data2,data})
+     }
+
+    formatData = async () => {
+        const { invoices } = this.props
+        console.log(this.props)
+        console.log(invoices)
+
+        const formatted = await invoices.map((invoice,index) => {
+            console.log(invoice)
+            let i =0
+            const formatted = {
+                'Name': invoice.firstname + ' ' + invoice.lastname,
+                'Email': invoice.email,
+                'Amount': 'NGN'+invoice.amount,
+                'created_date': new Date(invoice.date).toDateString(),
+            }
+
+            return formatted;
+        })
+
+        console.log(formatted)
+        this.setState({ invoices: formatted, filtered: formatted })
     }
 
-    componentDidMount() {
-        const referrals = [
-            {
-                id: '15623456010',
-                referred: 'seungbade@yahoo.com',
-                amount: 500.00,
-                date: 'Dec 09, 2019'
-            },
-            {
-                id: '15623456010',
-                referred: 'seungbade@yahoo.com',
-                amount: 500.00,
-                date: 'Dec 09, 2019'
-            }
-        ]
+    async componentDidMount() {
+        this.props.getReferals()
+        await this.formatData()
+        await this.populateHeaders()
+        await this.populateData()
+    }
 
-        this.setState({ referrals }, () => {
-            this.populateHeaders()
-            this.populateData()
-        })
+    async componentDidUpdate(prevProps) {
+        if (prevProps.invoices !== this.props.invoices) {
+            await this.formatData()
+            await this.populateHeaders()
+            await this.populateData()
+        }
     }
 
     handleInput(key, e) {
@@ -65,16 +126,132 @@ class Referrals extends React.Component {
     }
 
     go = index => {
-        let { page, pageCount } = this.state
-        if (index === -1 && page > 1) this.setState({ page: page + index })
-        else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+        
+        console.log(this.state.pageCount)
+        if(this.state.page+1<=this.state.pageCount){
+            this.state.currentpage = this.state.currentpage + index
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+           if(this.state.page==this.state.pageCount-1){
+            
+          let left =    this.state.data2.length-(this.state.total_no_data*this.state.currentpage)
+          console.log(left)
+          let k = 1
+          for(var i=0;i<left;i++){
+            filtdata.push(this.state.data2[this.state.data2.length-k])
+            k = k+1
+          }
+           }
+           else{
+            
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+               // console.log(i)
+                 filtdata.push(this.state.data2[i+1])
+             }
+           }
+           
+            
+             
+             this.state.data = filtdata
+        }
+        else{
+            //console.log("jj")
+        }
+      
+   
     }
 
-    filterDate = filterDate => this.setState({ filterDate })
+    prev = index => {
+      console.log(this.state.currentpage)
+        
+        if(this.state.currentpage>=1){
+            this.state.currentpage = this.state.currentpage+ index
+ 
+            let { page, pageCount } = this.state
+            if (index === -1 && page > 1) this.setState({ page: page + index }
+                
+                )
+            else if (index === 1 && page < pageCount) this.setState({ page: page + index })
+            
+           let filtdata = []
+            for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
+              // console.log(i)
+                filtdata.push(this.state.data2[i])
+            }
+            
+             
+             this.state.data = filtdata
+        }
+       
+    
+     }
+
+    paginate = (minPage) => {
+        let { data } = this.state
+
+        --minPage
+        data.slice(minPage * 20, (minPage + 1) * 20)
+
+        this.setState({ data })
+    }
+
+    filterDueDate = filterDueDate => {
+        const { invoices } = this.state
+       console.log(filterDueDate)
+        let filtered = []
+
+        if (filterDueDate !== '') {
+            invoices.forEach(invoice => {
+                console.log(new Date(invoice.due_date).toDateString())
+               //console.log(invoice)
+                console.log(new Date(filterDueDate).toDateString())
+                if (new Date(invoice.due_date).toDateString() === new Date(filterDueDate).toDateString()) filtered.push(invoice)
+            })
+        } 
+        else filtered = invoices
+
+        this.setState({ filterDueDate, filtered }, this.populateData)
+    }
+
+    filterCreatedDate = filterCreatedDate => {
+        const { invoices } = this.state
+        let filtered = []
+
+        if (filterCreatedDate !== '') {
+            invoices.forEach(invoice => {
+                if (new Date(invoice.created_date).toDateString() === new Date(filterCreatedDate).toDateString()) filtered.push(invoice)
+            })
+        } else filtered = invoices
+
+        this.setState({ filterCreatedDate, filtered }, this.populateData)
+    }
+
+    filterRecieverName = filtername => {
+        const { invoices } = this.state
+        let filtered = []
+      //  console.log(filtername)
+
+        if (filtername !== '') {
+            invoices.forEach(invoice => {
+                console.log(invoice.receiver_name)
+                console.log(filtername)
+              if (invoice.Name.toLowerCase() === filtername.toLowerCase()) filtered.push(invoice)
+            })
+        } else filtered = invoices
+
+        this.setState({ filtername, filtered }, this.populateData)
+    }
+
+    
 
     render() {
         const {
-            headers, data, filterDate, page, pageCount,
+            headers, data, filterRecieverName, filterDueDate, page_2, page, pageCount,minPage, maxPage, filterCreatedDate
         } = this.state
 
         return (
@@ -82,11 +259,19 @@ class Referrals extends React.Component {
                 <div className="filter-options">
                     <div>
                         <div className="date-range">
+                           
                             <div className="date-picker">
-                                <label>Filter By Date</label>
+                                <label>Filter By Date Created</label>
                                 <div>
-                                    <input type="date" value={filterDate} onChange={e => this.filterDate(e.target.value)} />
+                                    <input type="date" value={filterCreatedDate} onChange={e => this.filterCreatedDate(e.target.value)} />
                                     <i className="material-icons">event</i>
+                                </div>
+                            </div>
+                            <div className="date-picker">
+                                <label>Filter By Reciever Name</label>
+                                <div>
+                                    <input type="text" value={filterRecieverName} onChange={e => this.filterRecieverName(e.target.value)} />
+                                  
                                 </div>
                             </div>
                             {/* <div className="date-picker">
@@ -100,27 +285,26 @@ class Referrals extends React.Component {
                     </div>
                     <div className="pagi-nation">
                         <div className="prev-next">
-                            <div className="arrow-prev" onClick={() => this.go(-1)}><i className="material-icons">keyboard_arrow_left</i></div>
+                            <div className="arrow-prev" onClick={() => this.prev(-1)}><i className="material-icons">keyboard_arrow_left</i></div>
                             <div className="page-count">
                                 <p>{page} of {pageCount}</p>
                             </div>
                             <div className="arrow-next" onClick={() => this.go(1)}><i className="material-icons">keyboard_arrow_right</i></div>
                         </div>
                         <div className="count-picker">
-                            <p>40 <i className="material-icons">keyboard_arrow_down</i></p>
-                            <ul>
-                                <li>20</li>
-                                <li>30</li>
-                                <li>40</li>
-                                <li>50</li>
-                            </ul>
+                           
                         </div>
                     </div>
                 </div>
-                <Table headers={headers} data={data} />
+                <Table headers={headers} data={data} title="Invoices" />
             </div>
         );
     }
 }
 
-export default Referrals;
+const mapStateToProps = state => ({
+    error: state.errors,
+    invoices: state.dashboard.referals
+})
+
+export default connect(mapStateToProps, { getReferals })(Refferals);

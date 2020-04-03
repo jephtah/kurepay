@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
+import './beneficiaries.css'
+import Popup from '../../common/Popup';
+import axios from 'axios';
+import { BASE_URL } from "../../../config/constants";
 import Button from '../../common/Button';
 import Input from '../../common/Input';
 
@@ -55,7 +58,9 @@ class Airtime extends Component {
         type: 'number',
         placeholder: 'Enter Credit Amount'
       }
-    }
+    },
+    save: false,
+    popup: false,
     // }
   }
 
@@ -84,7 +89,7 @@ class Airtime extends Component {
     const amount = this.state.amount.value
     const phone = this.state.number.value
 
-    if (id !== '' && amount !== '' && phone !== '') this.props.buyAirtime({ id, amount, phone })
+    if (id !== '' && amount !== '' && phone !== '') this.props.buyAirtime({ id, amount, phone },this.state.save)
   }
 
   updateForm = (key, value) => {
@@ -95,11 +100,53 @@ class Airtime extends Component {
     })
   }
 
+  getBeneficaries = () => {
+    this.setState({ popup: true, loading: true })
+    axios
+        .get(`${BASE_URL}/users/beneficiary`)
+        .then(res => {
+          console.log(res)
+            let benefiCiaries = []
+            res.data.data.forEach(beneficiaries => {
+                
+                if (beneficiaries.service === "payment_airtime_data") benefiCiaries.push(beneficiaries)
+            })
+           
+            this.setState({ beneficiaries: benefiCiaries })
+        })
+        .catch(err => {
+            console.log(err.response)
+        })
+        .finally(() => this.setState({ loading: false }))
+}
+selectBeneficiary = item => {
+  //  console.log(item)
+    let { number } = this.state
+    number.value = item.name 
+   
+    this.setState({
+        number,
+        popup: false
+    })
+}
+showPopup = () => {
+  this.setState({ show: true });
+  // this.setState({ popupStatus: 'status' });
+  // this.setState({ popupMessage: 'message' });
+}
+
+closePopup = () => {
+  this.setState({ show: false });
+}
+
+
   render() {
-    const { network, number, amount } = this.state;
+    const { network, number, amount,popupStatus,show, popupMessage } = this.state;
     const { tab } = this.props;
     return (
-      <form onSubmit={this.submitForm}>
+      <div>
+<Popup show={show} status={popupStatus} message={popupMessage} closePopup={this.closePopup} />
+<form onSubmit={this.submitForm}>
         {
           tab.headline ?
             <div className="tab-headline">
@@ -109,13 +156,53 @@ class Airtime extends Component {
         }
         <Input formData={network} change={this.updateForm} />
         <Input formData={number} change={this.updateForm} />
+        <p
+                        onClick={this.getBeneficaries}
+                        style={{
+                            textAlign: 'right',
+                            margin: 0,
+                            marginTop: -10,
+                            textTransform: 'uppercase',
+                            fontSize: 10,
+                            cursor: 'pointer',
+                            color: '#418298'
+                        }}
+                    >Choose from Beneficiaries</p>
         <Input formData={amount} change={this.updateForm} />
         <p style={{ color: 'red' }}>{this.props.error.message}</p>
+        <div>
+                        <input
+                            type="checkbox"
+                            value={this.state.save}
+                            onChange={(e) => this.setState({ save: !this.state.save })}
+                        />
+                        &nbsp;&nbsp;Save as beneficiary
+                    </div>
         {
           tab.button ?
             <Button type={'submit'} text={tab.button} /> : null
         }
+          {this.state.popup && (
+                        <div className="overlay">
+                            <div className="modal-container">
+                                <div style={{ textAlign: 'right', padding: 15 }}>
+                                    <span onClick={() => this.setState({ popup: false })} className="close">&times;</span>
+                                </div>
+                                {this.state.loading ? <div className="loading-container">
+                                    <img src={require('../../../assets/loading.gif')} alt="Loading" />
+                                </div> : <div className="beneficiaries">
+                                    {this.state.beneficiaries.map(item => (
+                                        <p onClick={() => this.selectBeneficiary(item)} key={item._id} className="item">
+                                          Phone Number -  {item.name} 
+                                        </p>
+                                    ))}
+                                </div>}
+                            </div>
+                        </div>
+                    )}
       </form>
+    
+      </div>
     )
   }
 }
