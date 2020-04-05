@@ -15,12 +15,8 @@ class Transactions extends React.Component {
         data: [],
         data2:[],
         filterDate: '',
-        minPage: 0,
-        maxPage: 0,
         filterType: '',
         filterCategory: '',
-        minPage: 0,
-        maxPage: 0,
         page: 1,
         page_2:0,
         pageCount:0,
@@ -70,7 +66,7 @@ class Transactions extends React.Component {
             data2.push(transaction2)
         }
 
-        if(Math.ceil(filtered.length/this.state.total_no_data)==0){
+        if(Math.ceil(filtered.length/this.state.total_no_data)===0){
             this.state.pageCount = 1
            }
            else{
@@ -88,11 +84,10 @@ class Transactions extends React.Component {
 
         let formatted = []
         formatted = await transactions.map(transaction => {
-            const { transactionId, from, to, originalAmount, receivedAmount, receivedCurrency, sentCurrency, status, updatedAt, transactionType } = transaction
-            const statuses = ['Pending', 'Confirmed', 'Cancelled']
-            const types = ['Wallet To Wallet', 'Wallet To Bank', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies','Airtime']
+            const { transactionId, from, originalAmount, receivedAmount, receivedCurrency, sentCurrency, updatedAt, } = transaction
+            
+           
             const isSender = from === this.props.user.email
-            //const isSender = to === this.props.user.email
             const amountSent = `${sentCurrency} ${originalAmount}`
             const amountReceived = `${receivedCurrency} ${receivedAmount}`
             
@@ -147,7 +142,7 @@ class Transactions extends React.Component {
             else if (index === 1 && page < pageCount) this.setState({ page: page + index })
             
            let filtdata = []
-           if(this.state.page==this.state.pageCount-1){
+           if(this.state.page===this.state.pageCount-1){
             
           let left =    this.state.data2.length-(this.state.total_no_data*this.state.currentpage)
           console.log(left)
@@ -160,7 +155,7 @@ class Transactions extends React.Component {
            else{
             
             for(var i=this.state.currentpage;i<this.state.currentpage+this.state.total_no_data;i++){
-               // console.log(i)
+              
                  filtdata.push(this.state.data2[i+1])
              }
            }
@@ -254,7 +249,7 @@ class Transactions extends React.Component {
 
     render(){
         const {
-            headers, data, filterDate,page, pageCount, minPage, maxPage, filterType, filterCategory
+            headers, data, filterDate,page, pageCount, filterType, filterCategory
         } = this.state
         const types = ['All', 'Wallet to Wallet Transfer', 'Wallet to Bank Transfer', 'Card To Wallet', 'Wallet To Crypto', 'Crypto To Wallet', 'Naira To Wallet', 'Admin Fiat To Wallet', 'Wallet To Utilies','Airtime']
 

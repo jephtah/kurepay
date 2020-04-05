@@ -134,11 +134,13 @@ class Data extends Component {
                     [key]: data
                 })
                 if (key === 'network'){
+                    if(value){
+                        console.log(value)
                     this.props.getDataBundle(value)
                     axios
                     .post(`${BASE_URL}/utilities/serviceproduct/`+value)
                     .then(res => {
-                        console.log(this.props)
+                        console.log(res)
                     const { plan } = this.state
                     const { config } = plan
                     let options = [{ val: '', text: 'Choose Data Plan' }]
@@ -153,14 +155,17 @@ class Data extends Component {
                     plan.config = config
                     this.setState({ plan, bundles: res.data.body.data.productCategories })
                     })
+                    }
                     
                 }
               
             
      
         if (key === 'plan'){
-            const bundle = this.state.bundles.filter(item => item.bundleCode == value)
+            if(value){
+                const bundle = this.state.bundles.filter(item => item.bundleCode === value)
             this.setState({ amount: bundle[0].amount })
+            }
         }
     }
 
