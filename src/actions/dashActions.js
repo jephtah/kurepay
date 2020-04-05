@@ -384,8 +384,7 @@ export const buyData = (data,save) => dispatch => {
 }
 
 export const payElectricity = (data,save) => dispatch => {
-  console.log(data)
-  console.log(save,data.meter_number)
+  console.log(save,data.meter)
   dispatch({
     type: LOADING,
     payload: true
@@ -407,7 +406,7 @@ export const payElectricity = (data,save) => dispatch => {
         type: GET_ERRORS,
         payload: err.response
           ? err.response.data
-          : { message: 'Something went wrong. Please try again' }
+          : { message: 'Something went wrong. Please try again'}
       })
     )
     .finally(() => {
@@ -419,8 +418,8 @@ export const payElectricity = (data,save) => dispatch => {
 
     if(save){
       const datum = {
-      number:data.meter_number,
-      name:data.meter_number,
+      number:data.meter,
+      name:data.meter,
       service: "payment_electricity",
     }
     console.log(datum)

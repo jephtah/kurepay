@@ -107,10 +107,10 @@ class Electricity extends Component {
         const phone = this.state.phone.value
         const amount = this.state.amount.value
         const service_category_id = this.state.provider.value
-        const meter_number = this.state.meterNumber.value
+        const meter = this.state.meterNumber.value
         
-        if (phone !== '' && amount !== '' && service_category_id !== '' && meter_number !== '') this.props.payElectricity({
-            phone, amount, service_category_id, meter_number
+        if (phone !== '' && amount >= 600 && service_category_id !== '' && meter !== '') this.props.payElectricity({
+            phone, amount, service_category_id, meter
         },this.state.save)
     }
 
@@ -212,6 +212,17 @@ class Electricity extends Component {
                         }}
                     >Choose from Beneficiaries</p>
                 <Input formData={amount} change={this.updateForm} />
+                <p
+                        style={{
+                            textAlign: 'right',
+                            margin: 0,
+                            marginTop: -10,
+                            textTransform: 'uppercase',
+                            fontSize: 10,
+                            cursor: 'pointer',
+                            color: 'red'
+                        }}
+                    >minimum amount is 600</p>
                 <Input formData={phone} change={this.updateForm} />
                 <div>
                         <input
