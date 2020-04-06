@@ -140,7 +140,7 @@ class Data extends Component {
                     axios
                     .post(`${BASE_URL}/utilities/serviceproduct/`+value)
                     .then(res => {
-                        console.log(res)
+                        console.log(res.data.body.data.productCategories)
                     const { plan } = this.state
                     const { config } = plan
                     let options = [{ val: '', text: 'Choose Data Plan' }]
@@ -163,7 +163,8 @@ class Data extends Component {
      
         if (key === 'plan'){
             if(value){
-                const bundle = this.state.bundles.filter(item => item.bundleCode === value)
+                const bundle = this.state.bundles.filter(item => item.bundleCode == value)
+                console.log(value)
             this.setState({ amount: bundle[0].amount })
             }
         }
