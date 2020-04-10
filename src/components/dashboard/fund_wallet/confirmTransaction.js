@@ -10,7 +10,7 @@ class Cfirm extends Component {
     async componentDidMount(){
       //this.status = "Please wait while we confirm your transaction"
        const details= ({
-        transId:"151322"
+        transId:localStorage.getItem('rand')
        })
        
     axios
@@ -44,7 +44,7 @@ class Cfirm extends Component {
     if(this.status==true){
         return  <button>
        
-        <span>Transaction Succesfull</span>
+        <span>Succesfull</span>
     </button>
     }
   }
