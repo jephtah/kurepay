@@ -15,6 +15,6 @@ export const GET_BUNDLE_NETWORK = 'GET_BUNDLE_NETWORK'
 export const GET_ELECTRICTY = 'GET_ELECTRICTY'
 export const GET_TV_SUBS = 'GET_TV_SUBS'
 export const GET_BUNDLLE = 'GET_BUNDLLE'
-
+export const GET_TRANS_STATUS='GET_TRANS_STATUS'
 
 

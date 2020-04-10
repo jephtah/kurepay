@@ -1,4 +1,4 @@
-import { GET_CRYPTO_ADDRESS, GET_OTP, BANK_NAME, BANK_NAME_LOADING, BANK_NAME_ERROR, GET_TRANSACTIONS, GET_INVOICES,GET_REFERRALS,GET_DATA_AVAILABLE,GET_BUNDLE_NETWORK, GET_ELECTRICTY,GET_TV_SUBS,GET_BUNDLLE} from '../actions/types'
+import { GET_CRYPTO_ADDRESS, GET_OTP, BANK_NAME, BANK_NAME_LOADING, BANK_NAME_ERROR, GET_TRANSACTIONS, GET_INVOICES,GET_REFERRALS,GET_DATA_AVAILABLE,GET_BUNDLE_NETWORK, GET_ELECTRICTY,GET_TV_SUBS,GET_BUNDLLE,GET_TRANS_STATUS} from '../actions/types'
 
 const initialState = {
   cryptoAddress: null,
@@ -77,6 +77,11 @@ export default function(state = initialState, action) {
           return {
             ...state,
             bundle: action.payload
+          }
+          case GET_TRANS_STATUS:
+          return {
+            ...state,
+            trans_stats: action.payload
           }
     default:
       return state

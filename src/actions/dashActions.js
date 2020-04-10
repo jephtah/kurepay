@@ -15,7 +15,8 @@ import {
   GET_DATA_AVAILABLE,
   GET_ELECTRICTY,
   GET_TV_SUBS,
-  GET_BUNDLLE
+  GET_BUNDLLE,
+  GET_TRANS_STATUS
 
 
 } from './types'
@@ -35,6 +36,8 @@ export const fundWithCard = amount => dispatch => {
   axios
     .post(`${BASE_URL}/fundWallet/credit_card`, { amount })
     .then(res => {
+      localStorage.setItem('rand',res.data.result.transId)
+     // console.log(res.data.result.transId)
       window.location = res.data.result.paymenturl
     })
     .catch(err =>
@@ -913,6 +916,47 @@ export const ConfirmSmartCard = (no,id) => dispatch => {
       })
     })
 }
+
+export const confirmTrans = (data) => (dispatch, store) => {
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+
+  dispatch({
+    type: GET_ERRORS,
+    payload: {}
+  })
+
+  axios
+    .post(`${BASE_URL}/fundWallet/card_response`,data)
+    .then(async res => {
+      const { data } = res
+      console.log(data)
+
+      dispatch({
+        type: GET_TRANS_STATUS,
+        payload: data
+      })
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data
+          : { message: 'Something went wrong. Please try again' }
+      })
+    )
+    .finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    })
+}
+
+
+
 
 
 

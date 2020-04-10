@@ -7,6 +7,7 @@ import Crypto from './Crypto';
 import Card from './Card';
 import Transfer from './Transfer';
 import Ussd from './Ussd';
+import Cfirm from './confirmTransaction';
 
 
 class index extends Component {
@@ -62,7 +63,48 @@ class index extends Component {
                 onSelectTab: () => this.go('ussd'),
                 isSelected: selectedTab === 'ussd',
                 headline: 'Fund your wallet via USSD'
+            },
+            {
+                title: 'vyy Confirm_trans',
+                text: 'cfirm',
+                onSelectTab: () => this.go('cfirm'),
+                isSelected: selectedTab === 'cfirm',
+                headline: 'Confirming Transaction',
+                
             }
+        ]
+        const tabs2 = [
+            {
+                title: 'Via Crypto',
+                text: 'crypto',
+                onSelectTab: () => this.go('crypto'),
+                isSelected: selectedTab === 'crypto',
+                headline: 'Choose a cryptocurrency to fund your wallet',
+                button: 'test submit'
+            },
+            {
+                title: 'Via Credit/Debit Card',
+                text: 'card',
+                onSelectTab: () => this.go('card'),
+                isSelected: selectedTab === 'card',
+                headline: 'Enter an amount to fund your wallet with',
+                button: 'Pay with Credit/Debit Card'
+            },
+            {
+                title: 'Via Bank Transfer',
+                text: 'transfer',
+                onSelectTab: () => this.go('transfer'),
+                isSelected: selectedTab === 'transfer',
+                headline: 'Transfer to the account below to fund your wallet'
+            },
+            {
+                title: 'Via USSD',
+                text: 'ussd',
+                onSelectTab: () => this.go('ussd'),
+                isSelected: selectedTab === 'ussd',
+                headline: 'Fund your wallet via USSD'
+            },
+            
         ]
 
         const renderView = (tab) => {
@@ -74,6 +116,8 @@ class index extends Component {
                 return <Transfer tab={tab} />
             } else if (selectedTab === 'ussd') {
                 return <Ussd tab={tab} />
+            } else if (selectedTab === 'cfirm') {
+                return <Cfirm tab={tab} />
             }
         }
 
@@ -81,7 +125,7 @@ class index extends Component {
             <DashboardLayout history={this.props.history}>
                 <div className="user_dashboard">
                     <div className="left">
-                        <Tabs tabs={tabs} />
+                        <Tabs tabs={tabs2} />
                     </div>
                     {tabs.map((tab, i) => selectedTab === tab.text && (
                         <div className="right" key={i}>{renderView(tab)}</div>))}
