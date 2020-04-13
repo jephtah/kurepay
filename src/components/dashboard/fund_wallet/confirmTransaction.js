@@ -8,7 +8,7 @@ import { BASE_URL } from "../../../config/constants";
 class Cfirm extends Component {
   status
     async componentDidMount(){
-      //this.status = "Please wait while we confirm your transaction"
+  
        const details= ({
         transId:localStorage.getItem('rand')
        })
@@ -16,9 +16,14 @@ class Cfirm extends Component {
     axios
     .post(`${BASE_URL}/fundWallet/card_response`,details)
     .then(res => { 
+        console.log(res)
         this.status =  res.data.status
         console.log(res.data.status)
-    })
+    }) .catch(err =>
+       {
+         this.status =  err.response.data.status
+       }
+      )
     
     
 
